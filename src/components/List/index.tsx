@@ -45,7 +45,7 @@ const StyledList = styled.aside<{tasks : any}>`
     @media (max-width: 710px){
         margin-right: 0px;
         margin-left: 5px;
-        width: 325px;
+        width: 100%;
         border-left: none;
         border-top: 1px dashed #8e8686;
     }
