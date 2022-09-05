@@ -41,12 +41,14 @@ const StyledClock = styled.div`
 
 interface Props {
     selected: ITask | undefined
+    finishTask: () => void
 }
 
-export default function Timer({selected} : Props) {
+export default function Timer({selected, finishTask} : Props) {
 
     const [time, setTime] = useState<number>(0);
     const [task, setTask] = useState<string>('');
+    const [click, setClick] = useState<boolean>(false);
 
     useEffect(() =>{
         if(selected){
@@ -56,14 +58,16 @@ export default function Timer({selected} : Props) {
     },[selected])
 
     const countdown = (counter:number = 0) => {
+        setClick(true);
         setTimeout( () => {
             if(counter > 0){
                 setTime(counter - 1)
                 return countdown(counter - 1);
             }
+            finishTask(); 
+            setClick(false);
         }, 1000);
-
-    }
+    };
 
   return (
     <StyledTimer>
@@ -72,7 +76,7 @@ export default function Timer({selected} : Props) {
             <h3>{task}</h3>
         </Title>
         <StyledClock>
-            <Clock time={time}/>    
+            <Clock time={time} go={click}/>    
         </StyledClock>
         <Button onClick={() => countdown(time)}>Começar</Button>
     </StyledTimer>

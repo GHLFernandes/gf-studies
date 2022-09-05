@@ -42,7 +42,7 @@ export default function InputTime({label, onChange, value}: { label: string , on
           id='time' 
           name='time' 
           onChange={handleChange}
-          value={value}
+          value={value?value:'00:00:00'}
           min='00:00:00' 
           max='08:59:59'  
           required 

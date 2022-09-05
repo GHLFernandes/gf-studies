@@ -80,7 +80,7 @@ export default function List({onClick, selected, tasks} : Props) {
             <h3>Estudos do Dia</h3>
 
                 <ul>
-                    {tasks.map((task:any) => <Item key={task.id} selected={selected} task={task} onClick={handleClick}/> )}
+                    {tasks.map((task:ITask) => <Item key={task.id} task={task} onClick={handleClick}/> )}
                 </ul> 
 
         </StyledList>

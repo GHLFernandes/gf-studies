@@ -15,8 +15,6 @@ function App() {
 
   const [tasks, setTasks] = useState<ITask[] | []>([]);
   const [selectTask, setSelectTask] = useState<ITask>();
-  const [ time, setTime ] = useState('');
-  const [ task, setTask ] = useState('');
 
   const handleSubmit = (task:any) => {
     setTasks([...tasks, task])
@@ -24,19 +22,33 @@ function App() {
 
   const handleTask = (task:ITask) => {
     setSelectTask(task);
-    setTask(task.task)
-    setTime(task.time)
     setTasks(tasks => tasks.map( item => ({
       ...item,
       selected: task.id === item.id ? true : false
     })))
+  };
+
+  const finishTask = () => {
+    if(selectTask){
+      setSelectTask(undefined);
+      setTasks(tasks => tasks.map(item => {
+        if(item.id === selectTask.id){
+          return {
+            ...item,
+            selected: false,
+            completed: true
+          }
+        }
+        return item;
+      }))
+    }
   }
 
   return (
     <StyledApp>
       <Form onSubmit={handleSubmit}/>
       <List tasks={tasks} selected={selectTask} onClick={handleTask}/>
-      <Timer selected={selectTask}/>
+      <Timer selected={selectTask} finishTask={finishTask}/>
     </StyledApp>
   );
 }
