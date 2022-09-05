@@ -14,7 +14,7 @@ const StyledTimer = styled.div`
     margin: 0 auto;
 
     @media (max-width: 710px){
-        width: 325px;
+        width: 100%;
         margin: 0;
     }
 `;
